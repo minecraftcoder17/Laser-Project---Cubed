@@ -6,8 +6,11 @@
 </head>
 <body>
     <h1>Laser Simulator</h1>
-    <input id="heightslider" type="range" min="100" max="600">
-    <input id="radiusslider" type="range" min="20" max="200">
+    <div class="box" display: flex>
+        <input id="heightslider" type="range" min="100" max="600"><br>
+        <input id="radiusslider" type="range" min="20" max="200">
+    </div>
+
     <input id="ceiling" type="checkbox">
     <br>
     <canvas id="mainCanvas" width="1000" height="700"></canvas>
@@ -15,6 +18,7 @@
         var objects = [[]]
         const canvas = document.getElementById("mainCanvas");
         const ctxmain = canvas.getContext('2d');
+        canvas.style.backgroundColor = "030710"
 
         const elements = document.querySelectorAll('input');
         elements.forEach((element)=>{
@@ -33,7 +37,8 @@
             objects = [
                 [500,heightslider.value,radiusslider.value,0]
             ]
-            ctxmain.clearRect(0, 0, canvas.width, canvas.height);
+            ctxmain.fillStyle = "#030710" 
+            ctxmain.fillRect(0, 0, canvas.width, canvas.height);
             ctxmain.strokeStyle = "#000000"
             renderobjects()
             simulate()
@@ -49,9 +54,11 @@
             objects.forEach(element => {
               objectrender.arc(element[0],element[1],element[2],0,Math.PI*2)  
             });
-            objectrender.stroke()
-            objectrender.fillStyle = "#FFF0FF"
+            objectrender.fillStyle = "#141440"
+            objectrender.strokeStyle = "#F0F0FF"
+            objectrender.lineWidth = 2
             objectrender.fill()
+            objectrender.stroke()
             //Draw all objects
         }
 
@@ -68,22 +75,32 @@
             beam.beginPath();
             beam.moveTo(x, y);
 
+
             for (let i = 0; i < 5000; i++) {
                 x+=speed*Math.cos(angle) 
                 y+=speed*Math.sin(angle)
                 objects.forEach(element => {
-                    if(Math.hypot(element[0] - x, element[1] - y)<element[2]){
+                    if(Math.hypot(element[0] - x, element[1] - y)<element[2] && material == 0){
                         let colangle = Math.atan2(y-element[1],x-element[0])
-                        angle = 2*colangle-angle+Math.PI
-
+                        //angle = 2*colangle-angle+Math.PI
+                        angle = colangle+(angle-colangle)*1.3;
+                        material = 1
+                        beam.lineTo(x,y)  
                     }
                 }); 
                 if((y<0 || y>700)&&ceiling.checked){
                     angle*=-1
+                    beam.lineTo(x,y)  
+
                 }
                 
-                beam.lineTo(x,y)  
             }
+            beam.lineTo(x,y)  
+            beam.strokeStyle = "#FFBBBB"
+            beam.lineWidth = 6
+            beam.stroke()
+            beam.strokeStyle = "#FF0000"
+            beam.lineWidth = 2
             beam.stroke()
         }
 
