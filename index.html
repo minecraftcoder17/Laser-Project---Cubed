@@ -9,6 +9,11 @@
     <div class="box" display: flex>
         <input id="heightslider" type="range" min="100" max="600"><br>
         <input id="radiusslider" type="range" min="20" max="200">
+        <select id="select" name="cars">
+            <option value="reflective">Reflective</option>
+            <option value="">Refractive</option>
+            <option value="opaque">Opaque</option>
+        </select>
     </div>
 
     <input id="ceiling" type="checkbox">
@@ -74,9 +79,11 @@
             const beam = canvas.getContext("2d");
             beam.beginPath();
             beam.moveTo(x, y);
-
+            let d = 0
 
             for (let i = 0; i < 5000; i++) {
+                let oldx = x
+                let oldy = y
                 x+=speed*Math.cos(angle) 
                 y+=speed*Math.sin(angle)
                 objects.forEach(element => {
@@ -90,8 +97,24 @@
                         }
 
                         //angle = 2*colangle-angle+Math.PI
+                        d = angle - colangle+(angle-colangle)/1.3;
                         angle = colangle+(angle-colangle)/1.3;
-                        console.log(colangle)
+                        material = 1
+                        beam.lineTo(x,y)
+                    }
+                    if(Math.hypot(element[0] - x, element[1] - y)>element[2] && material == 1 && Math.hypot(element[0] - oldx, element[1] - oldy)<element[2]){
+                       let colangle = Math.atan2(y-element[1],x-element[0])
+                        if(colangle>Math.PI){
+                            colangle=colangle-2*Math.PI
+                        }
+                        if(colangle<-Math.PI){
+                            colangle=colangle+2*Math.PI
+                        }
+                        console.log(1)
+                        //angle = Math.PI-(2*colangle-angle+Math.PI)
+                        console.log(d/angle)
+                        angle*=2
+                        console.log(angle)
                         material = 1
                         beam.lineTo(x,y)  
                     }
@@ -112,7 +135,6 @@
             beam.stroke()
         }
 
-    
 
     </script>
 </body>
