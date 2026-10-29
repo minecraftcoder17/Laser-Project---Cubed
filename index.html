@@ -6,14 +6,47 @@
 </head>
 <body>
     <h1>Laser Simulator</h1>
+    <input id="height" type="range" min="100" max="700">
     <canvas id="mainCanvas" width="1000" height="700">
 
     </canvas>
     <script>
+        var objects = [[]]
         const canvas = document.getElementById("mainCanvas");
-        simulate()
+        const ctxmain = canvas.getContext('2d');
+
+        const heightslider = document.getElementById("height");
+        heightslider.addEventListener('input', function(event) {
+           update()
+        });
+        update()
+
+        function update(){
+            objects = [
+                [100,heightslider.value,50,0]
+            ]
+            console.log(heightslider.value)
+            ctxmain.clearRect(0, 0, canvas.width, canvas.height);
+            renderobjects()
+            simulate()
+
+        }
+
+
+
+        function renderobjects(){
+            const objectrender = canvas.getContext("2d");
+            objectrender.beginPath()
+            objects.forEach(element => {
+              objectrender.arc(element[0],element[1],element[2],0,Math.PI*2)  
+            console.log(element)
+            });
+            objectrender.stroke()
+            //Draw all objects
+        }
         
         function simulate(){
+
             var x = 0
             var y = 350
             var angle = 0
