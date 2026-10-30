@@ -130,22 +130,45 @@
 
     <br><br><br><br><br>
     Quiz:<br>
+    <div id="quiztext"></div>
     <select id="selectquiz">
 
     </select>
-    <br><br><br><br><br>
+    <br><br>
+    <button id="button" type="submit" name="button" value="enter"/>></button>
+
+    <br><br><br>
 
     <script>
+        var numberq = 0
         const dropdownquiz = document.getElementById("selectquiz");
-        console.log(dropdownquiz)
+        const textquiz = document.getElementById('quiztext');
         var questions = [
-            ["What is", ["answer1","answer3","answer2"],2]
+            ["What is", ["answer1","answer3","answer2"],2],
+            ["What is 2", ["answer1345","answer3","answer2"],2]
         ];
-        
-        for (var i = 0; i < questions.length; i++) {
-            console.log(questions[i])
+
+        dropdownquiz.addEventListener('input', function(event) {
+                console.log(dropdownquiz.value)
+            if(dropdownquiz.value = questions[numberq][2]){
+            }
+            dropdownquiz.selectedIndex = dropdownquiz.value;
+
+
+        });
+
+        askquestion(numberq)
+
+        document.getElementById('button').onclick = function() {
+            numberq = (numberq+1)%(questions.length)
+            askquestion(numberq)
+            console.log(numberq)
+        };
+
+        function askquestion(i) {
+            dropdownquiz.options.length = 0;
+            textquiz.textContent = questions[i][0]
             for (var j = 0; j < questions[i][1].length; j++) {
-                console.log(questions[i][1])
                 var option = document.createElement("option");
                 option.text = questions[i][1][j];
                 option.value = j;
