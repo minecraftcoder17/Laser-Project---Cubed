@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Laser Project</title>
+    <style>
+        select {padding: 4px; border: 2px solid s#0f0101; border-radius: 10px;}
+
+
+    </style>
 </head>
 <body>
     <h1>Laser Simulator</h1>
@@ -131,11 +136,12 @@
     <br><br><br><br><br>
     Quiz:<br>
     <div id="quiztext"></div>
-    <select id="selectquiz">
+    <select id="selectquiz"></select><br><br>
+    <button id="button345" type="submit" name="button345" value="enter"/>Submit Answer</button>
 
-    </select>
-    <br><br>
-    <button id="button" type="submit" name="button" value="enter"/>></button>
+    <button id="button" type="submit" name="button" value="enter"/>New Question</button>
+
+    <div id="wasyouranswercorrectyesorno"></div>
 
     <br><br><br>
 
@@ -144,21 +150,20 @@
         const dropdownquiz = document.getElementById("selectquiz");
         const textquiz = document.getElementById('quiztext');
         var questions = [
-            ["What is", ["answer1","answer3","answer2"],2],
+            ["Which of these objects is most likely to be reflective?", ["Tomato","Mirror","Rock","Textbook"],2],
+            ["Which of these objects is most likely to refract light?", ["Drinking Glass","Metal Spoon","Rock"],2],
             ["What is 2", ["answer1345","answer3","answer2"],2]
         ];
 
-        dropdownquiz.addEventListener('input', function(event) {
-                console.log(dropdownquiz.value)
-            if(dropdownquiz.value = questions[numberq][2]){
-            }
-            dropdownquiz.selectedIndex = dropdownquiz.value;
-
-
-        });
 
         askquestion(numberq)
+        document.getElementById('button345').onclick = function() {
+            if(dropdownquiz.value == questions[numberq][2]){
+                console.log(dropdownquiz.value)
+            }
 
+
+        };
         document.getElementById('button').onclick = function() {
             numberq = (numberq+1)%(questions.length)
             askquestion(numberq)
