@@ -131,7 +131,8 @@
 
 
     </script>
-
+    <h1>Physics of Light Rays</h1>
+    
 
     <br><br><br><br><br>
     Quiz:<br>
@@ -141,7 +142,7 @@
 
     <button id="button" type="submit" name="button" value="enter"/>New Question</button>
 
-    <div id="wasyouranswercorrectyesorno"></div>
+    <div id="wasyouranswercorrectyesornoactuallyitwasnt"></div>
 
     <br><br><br>
 
@@ -149,17 +150,23 @@
         var numberq = 0
         const dropdownquiz = document.getElementById("selectquiz");
         const textquiz = document.getElementById('quiztext');
+        const answerbox = document.getElementById('wasyouranswercorrectyesornoactuallyitwasnt');
         var questions = [
-            ["Which of these objects is most likely to be reflective?", ["Tomato","Mirror","Rock","Textbook"],2],
-            ["Which of these objects is most likely to refract light?", ["Drinking Glass","Metal Spoon","Rock"],2],
-            ["What is 2", ["answer1345","answer3","answer2"],2]
+            ["Which of these objects is most likely to be reflective?", ["Tomato","Mirror","Rock","Textbook"],1],
+            ["Which of these objects is most likely to refract light?", ["Drinking Glass","Metal Spoon","Rock"],0],
+            ["What term is used to describe when light waves bend while traveling through an object?", ["Revision","Reflection","Refraction","Renovation"],2],
+            ["What term is used to describe when light waves bounce off of an object?", ["Revision","Reflection","Refraction","Renovation"],1],
+            ["Which of these objects is not primarily reflective nor refractive?", ["Glass Window","Bathroom Mirror","Wool Hat","Water"],2],
+            ["Fill in the blank : Light bounces off of ________ materials", ["reflective","opaque"],2]
         ];
 
 
         askquestion(numberq)
         document.getElementById('button345').onclick = function() {
             if(dropdownquiz.value == questions[numberq][2]){
-                console.log(dropdownquiz.value)
+                answerbox.textContent = "Correct!"
+            } else {
+                answerbox.textContent = "Incorrect, the correct answer was "+(questions[numberq][1][questions[numberq][2]]).toString()+"."
             }
 
 
@@ -167,7 +174,7 @@
         document.getElementById('button').onclick = function() {
             numberq = (numberq+1)%(questions.length)
             askquestion(numberq)
-            console.log(numberq)
+            answerbox.textContent = ""             
         };
 
         function askquestion(i) {
