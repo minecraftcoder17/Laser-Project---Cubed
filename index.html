@@ -89,7 +89,8 @@
                 let oldy = y
                 x+=speed*Math.cos(angle) 
                 y+=speed*Math.sin(angle)
-                objects.forEach(element => {
+                // this finally works and i will not touch it again
+                if(selectmat.value!=1){objects.forEach(element => {
                     if(Math.hypot(element[0] - x, element[1] - y)<element[2] && material == 0){
                         let colangle = Math.atan2(y-element[1],x-element[0])+Math.PI
                         if(colangle>Math.PI){
@@ -98,14 +99,37 @@
                         if(colangle<-Math.PI){
                             colangle=colangle+2*Math.PI
                         }
-                        if(selectmat.value ==1){
-                            angle = 2*colangle-angle+Math.PI
-                        } else if(selectmat.value ==2){angle = colangle+Math.asin((Math.sin(angle-colangle))/1.3);}
+
+                        if (selectmat.value==2){
+                            
+                            d = angle - colangle+(angle-colangle)/1.3;
+                            angle = colangle+(angle-colangle)/1.3;
+                            material = 1
+                            beam.lineTo(x,y)
+                        }
+                        else{speed=0}
+                    }
+                    if(Math.hypot(element[0] - x, element[1] - y)>element[2] && material == 1 && Math.hypot(element[0] - oldx, element[1] - oldy)<element[2] && (selectmat.value==2)){
+                        angle*=2
+                        material = 1
+                        beam.lineTo(x,y)  
+                    }
+                }); }
+                
+                if(selectmat.value==1){ objects.forEach(element => {
+                    if(Math.hypot(element[0] - x, element[1] - y)<element[2] && material == 0){
+                        let colangle = Math.atan2(y-element[1],x-element[0])+Math.PI
+                        if(colangle>Math.PI){
+                            colangle=colangle-2*Math.PI
+                        }
+                        if(colangle<-Math.PI){
+                            colangle=colangle+2*Math.PI
+                        }
+                        angle = 2*colangle-angle+Math.PI
                         material = 1
                         beam.lineTo(x,y)
-                        console.log(Math.hypot(element[0] - x, element[1] - y))
 
-                    }}); 
+                    }}); }
                 
             }
             beam.lineTo(x,y)  
@@ -130,12 +154,18 @@
         One exception is glass, which both reflects small amounts of light and allows most light through.</p>
     <br>
     
-    <p>The angle at which light is refracted can be determined by <a href="https://www.britannica.com/science/Snells-law">Snell's law. This law, discovered in 1621 (about 400 years ago) describes how light is bent while entering and exiting materials.</a> <br>(If you want to research more about Snell's law, you can click the link above.).</p>
+    <p>The angle at which light is refracted can be determined by <a href="https://www.britannica.com/science/Snells-law">Snell's law</a>. This law, discovered in 1621 (about 400 years ago) describes how light is bent while entering and exiting materials. <br>(If you want to research more about Snell's law, you can click the link above.).</p>
     <p>Snell's law implies that the amount light rays bend when entering a substance is determined by the refractive index of the substance. The refractive index of air is 1, and the refractive index of water is 1.3. Light bends less when traveling between materials withsimilar refractive indexes, and bends more if the refractive indexes are further apart. </p>
     
     
-    <br><br><br><br>
-    Quiz:<br>
+    <br>
+    <p>One very useful way light refraction is used is in glasses. Since the lenses in glasses can bend light, by using curved lenses, light refraction can be used to bend light and focus images on the eyes. In prescription glasses, this is useful to counteract nearsightedness or farsightedness. In reading glasses, this is used to help focus on nearby objects (such as books) and prevent eye strain.</p>
+    <br><br><br>
+    <p>If you want to test how much you learned, you can try the practice questions below. See if you can do it without looking at the text above! </p>
+
+    <br><br><br>
+    
+    Practice questions :<br>
     <div id="quiztext"></div>
     <select id="selectquiz"></select><br><br>
     <button id="button345" type="submit" name="button345" value="enter"/>Submit Answer</button>
@@ -157,7 +187,8 @@
             ["What term is used to describe when light waves bend while traveling through an object?", ["Revision","Reflection","Refraction","Renovation"],2],
             ["What term is used to describe when light waves bounce off of an object?", ["Revision","Reflection","Refraction","Renovation"],1],
             ["Which of these objects is not primarily reflective nor refractive?", ["Glass Window","Bathroom Mirror","Wool Hat","Water"],2],
-            ["Fill in the blank : Light bounces off of ________ materials", ["reflective","opaque"],2]
+            ["Fill in the blank : Light bounces off of ________ materials", ["reflective","invisible"],2]
+            ["Fill in the blank : Reflective materials are most often _________", ["opaque","opaque"],2]
         ];
 
 
