@@ -14,7 +14,7 @@
     <div class="box" display: flex>
         <input id="heightslider" type="range" min="100" max="600"><br>
         <input id="radiusslider" type="range" min="20" max="200">
-        <select id="select">
+        <select id="selectmat">
             <option value="1">Reflective</option>
             <option value="2">Refractive</option>
             <option value="3">Opaque</option>
@@ -40,12 +40,13 @@
         const heightslider = document.getElementById("heightslider");
         const radiusslider = document.getElementById("radiusslider");
         const ceiling = document.getElementById("ceiling");
+        const selectmat = document.getElementById("selectmat");
 
         update()
 
         function update(){
             objects = [
-                [500,heightslider.value,radiusslider.value,0]
+                [500,350,radiusslider.value,0]
             ]
             ctxmain.fillStyle = "#030710" 
             ctxmain.fillRect(0, 0, canvas.width, canvas.height);
@@ -75,7 +76,7 @@
         function simulate(){
 
             var x = 0
-            var y = 350
+            var y = Number(heightslider.value)
             var angle = 0
             //Initialise starting configuration
 
@@ -100,19 +101,14 @@
                         if(colangle<-Math.PI){
                             colangle=colangle+2*Math.PI
                         }
-                        //angle = 2*colangle-angle+Math.PI
-                        d = angle - colangle+(angle-colangle)/1.3;
-                        angle = colangle+Math.asin((Math.sin(angle-colangle))/1.3);
+                        if(selectmat.value ==1){
+                            angle = 2*colangle-angle+Math.PI
+                        } else if(selectmat.value ==2){angle = colangle+Math.asin((Math.sin(angle-colangle))/1.3);}
                         material = 1
                         beam.lineTo(x,y)
                         console.log(Math.hypot(element[0] - x, element[1] - y))
 
-                    } else if(Math.hypot(element[0] - x, element[1] - y)>element[2] && material == 1 && Math.hypot(element[0] - oldx, element[1] - oldy)<element[2]){
-                        let colangle = Math.atan2(y-element[1],x-element[0])
-                        angle = colangle+Math.asin((Math.sin(angle-colangle))*1.3);
-                        console.log(Math.hypot(element[0] - x, element[1] - y))
-                    }
-                }); 
+                    }}); 
                 if((y<0 || y>700)&&ceiling.checked){
                     angle*=-1
                     beam.lineTo(x,y)  
