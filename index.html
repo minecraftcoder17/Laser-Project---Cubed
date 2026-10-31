@@ -5,23 +5,21 @@
     <title>Laser Project</title>
     <style>
         select {padding: 4px; border: 2px solid s#0f0101; border-radius: 10px;}
-
-
+        body {font-family: Verdana, Geneva, sans-serif; color: rgb(232, 232, 255); background-color: rgb(5, 5, 43);}
+        a:link, a:visited {color: rgb(232, 188, 252);}
     </style>
 </head>
 <body>
     <h1>Laser Simulator</h1>
     <div class="box" display: flex>
-        <input id="heightslider" type="range" min="100" max="600"><br>
-        <input id="radiusslider" type="range" min="20" max="200">
-        <select id="selectmat">
+        Beam position : <input id="heightslider" type="range" min="100" max="600"><br>
+        Circle size : <input id="radiusslider" type="range" min="20" max="200"><br>
+        Material property: <select id="selectmat">
             <option value="1">Reflective</option>
             <option value="2">Transparent</option>
             <option value="3">Opaque</option>
         </select>
     </div>
-
-    <input id="ceiling" type="checkbox">
     <br>
     <canvas id="mainCanvas" width="1000" height="700"></canvas>
     <script>
@@ -39,7 +37,6 @@
         });
         const heightslider = document.getElementById("heightslider");
         const radiusslider = document.getElementById("radiusslider");
-        const ceiling = document.getElementById("ceiling");
         const selectmat = document.getElementById("selectmat");
 
         update()
@@ -109,11 +106,6 @@
                         console.log(Math.hypot(element[0] - x, element[1] - y))
 
                     }}); 
-                if((y<0 || y>700)&&ceiling.checked){
-                    angle*=-1
-                    beam.lineTo(x,y)  
-
-                }
                 
             }
             beam.lineTo(x,y)  
