@@ -1,2 +1,2 @@
 # Laser Project - Cubed
-a html page that demonstrates laser physics
+A html page that demonstrates laser physics. Made in HTML using VSCode 
