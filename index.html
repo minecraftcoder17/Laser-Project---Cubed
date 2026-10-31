@@ -10,7 +10,7 @@
     </style>
 </head>
 <body>
-    <h1>Laser Simulator</h1>
+    <h1>Light Refraction and Reflection</h1>
     <div class="box" display: flex>
         Beam position : <input id="heightslider" type="range" min="100" max="600"><br>
         Circle size : <input id="radiusslider" type="range" min="20" max="200"><br>
@@ -28,18 +28,18 @@
         const ctxmain = canvas.getContext('2d');
         canvas.style.backgroundColor = "030710"
 
-        const elements = document.querySelectorAll('input');
+
+     
+        const heightslider = document.getElementById("heightslider");
+        const radiusslider = document.getElementById("radiusslider");
+        const selectmat = document.getElementById("selectmat");
+        const elements = [heightslider,radiusslider,selectmat];
         elements.forEach((element)=>{
         element.addEventListener('input', function(event) {
            update()
         });
-     
-        });
-        const heightslider = document.getElementById("heightslider");
-        const radiusslider = document.getElementById("radiusslider");
-        const selectmat = document.getElementById("selectmat");
-
         update()
+        });
 
         function update(){
             objects = [
@@ -62,7 +62,11 @@
             objects.forEach(element => {
               objectrender.arc(element[0],element[1],element[2],0,Math.PI*2)  
             });
-            objectrender.fillStyle = "#141440"
+            if(selectmat.value==2){objectrender.fillStyle = "#141440"
+        }else if(selectmat.value==1){objectrender.fillStyle = "#242450"
+
+        }else{objectrender.fillStyle = "#040430"}
+            
             objectrender.strokeStyle = "#F0F0FF"
             objectrender.lineWidth = 2
             objectrender.fill()
@@ -89,6 +93,7 @@
                 let oldy = y
                 x+=speed*Math.cos(angle) 
                 y+=speed*Math.sin(angle)
+                
                 // this finally works and i will not touch it again
                 if(selectmat.value!=1){objects.forEach(element => {
                     if(Math.hypot(element[0] - x, element[1] - y)<element[2] && material == 0){
@@ -133,10 +138,14 @@
                 
             }
             beam.lineTo(x,y)  
-            beam.strokeStyle = "#FFBBBB"
+            beam.strokeStyle = "#FF0000"
+            beam.globalAlpha = 0.3
+            beam.lineWidth = 12
+            beam.stroke()
+            beam.globalAlpha = 0.6
             beam.lineWidth = 6
             beam.stroke()
-            beam.strokeStyle = "#FF0000"
+            beam.globalAlpha = 1
             beam.lineWidth = 2
             beam.stroke()
         }
