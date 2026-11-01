@@ -5,14 +5,20 @@
     <title>Laser Project</title>
     <style>
         select {padding: 4px; border: 2px solid s#0f0101; border-radius: 10px;}
-        body {font-family: Verdana, Geneva, sans-serif; color: rgb(232, 232, 255); background-color: rgb(5, 5, 43);}
-        a:link, a:visited {color: rgb(232, 188, 252);}
+        body {font-family: Verdana, Geneva, sans-serif; color: rgb(232, 232, 255); background-color: rgb(0, 0, 14); width: 50%; text-align: center;  margin: 0 auto;}
+
     </style>
 </head>
 <body>
     <h1>Light Refraction and Reflection</h1>
+    <br>
+    <br>
+    <br>
+
+    <h1>Demonstration</h1>
+    <p>This shows a visual demonstration of the basics of reflection and refraction. <br> Use the sliders below to adjust the position of the laser, and use the dropdown to observe how different materials interact with the beam of light!</p>
     <div class="box" display: flex>
-        Beam position : <input id="heightslider" type="range" min="100" max="600"><br>
+        Beam position : <input id="heightslider" type="range" min="100" max="600" value="450" step="0.1"><br>
         Circle size : <input id="radiusslider" type="range" min="20" max="200"><br>
         Material property: <select id="selectmat">
             <option value="1">Reflective</option>
@@ -164,12 +170,15 @@
     <br>
     
     <p>The angle at which light is refracted can be determined by <a href="https://www.britannica.com/science/Snells-law">Snell's law</a>. This law, discovered in 1621 (about 400 years ago) describes how light is bent while entering and exiting materials. <br>(If you want to research more about Snell's law, you can click the link above.).</p>
-    <p>Snell's law implies that the amount light rays bend when entering a substance is determined by the refractive index of the substance. The refractive index of air is 1, and the refractive index of water is 1.3. Light bends less when traveling between materials withsimilar refractive indexes, and bends more if the refractive indexes are further apart. </p>
-    
+    <p>Snell's law implies that the amount light rays bend when entering a substance is determined by the refractive index of the substance. The refractive index of air is 1, and the refractive index of water is about 1.3. Light bends less when traveling between materials withsimilar refractive indexes, and bends more if the refractive indexes are further apart. </p>
+    <p>The refractive index is inversely related to the speed light travels in a substance. This means that objects that light travels slower in will bend light more.</p>
+    <p>One way refractive indexes show up is in diamonds. The refractive index of diamond is around 2.42, meaning it bends light rays much more than materials such as glass (which has a refractive index of around 1.5). This is why diamonds appear sparkly.</p>
     
     <br>
     <p>One very useful way light refraction is used is in glasses. Since the lenses in glasses can bend light, by using curved lenses, light refraction can be used to bend light and focus images on the eyes. In prescription glasses, this is useful to counteract nearsightedness or farsightedness. In reading glasses, this is used to help focus on nearby objects (such as books) and prevent eye strain.</p>
     <br><br><br>
+        <h1>Quiz</h1>
+
     <p>If you want to test how much you learned, you can try the practice questions below. See if you can do it without looking at the text above! </p>
 
     <br><br><br>
@@ -186,6 +195,9 @@
     <br><br><br>
 
     <script>
+
+        
+        
         var numberq = 0
         const dropdownquiz = document.getElementById("selectquiz");
         const textquiz = document.getElementById('quiztext');
@@ -200,13 +212,20 @@
             ["Fill in the blank : Reflective materials are most often _________", ["opaque","opaque"],2]
         ];
 
-
+        var genericoption = document.createElement("option");
+        genericoption.disabled = true
+        genericoption.text = "Select an answer :";
+        genericoption.value = -1;
+        dropdownquiz.add(genericoption);
+        
         askquestion(numberq)
         document.getElementById('button345').onclick = function() {
             if(dropdownquiz.value == questions[numberq][2]){
                 answerbox.textContent = "Correct!"
-            } else {
+            } else if(dropdownquiz.value != -1) {
                 answerbox.textContent = "Incorrect, the correct answer was "+(questions[numberq][1][questions[numberq][2]]).toString()+"."
+            } else {
+                answerbox.textContent = "Please choose a valid answer."
             }
 
 
@@ -216,9 +235,11 @@
             askquestion(numberq)
             answerbox.textContent = ""             
         };
-
+        dropdownquiz.onchange = function(){        genericoption.disabled = true
+}
         function askquestion(i) {
-            dropdownquiz.options.length = 0;
+            genericoption.disabled = false
+            dropdownquiz.options.length = 1;
             textquiz.textContent = questions[i][0]
             for (var j = 0; j < questions[i][1].length; j++) {
                 var option = document.createElement("option");
