@@ -1,2 +1,3 @@
 # Laser Project - Cubed
-A html page that demonstrates laser physics. Made in HTML using VSCode 
+This is a page that demonstrates the basics of light reflection and reaction. It includes a simulation, a few paragraphs, and an interactive quiz. 
+Made in HTML using VSCode 
