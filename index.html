@@ -13,9 +13,9 @@
     <h1>Light Refraction and Reflection</h1>
     <br>
     <br>
-    <br>
 
-    <h1>Demonstration</h1>
+
+    <h1>Visual Demonstration</h1>
     <p>This shows a visual demonstration of the basics of reflection and refraction. <br> Use the sliders below to adjust the position of the laser, and use the dropdown to observe how different materials interact with the beam of light!</p>
     <div class="box" display: flex>
         Beam position : <input id="heightslider" type="range" min="100" max="600" value="450" step="0.1"><br>
@@ -169,13 +169,19 @@
         One exception is glass, which both reflects small amounts of light and allows most light through.</p>
     <br>
     
+    
+    <h1>More about Refraction</h1>
+
     <p>The angle at which light is refracted can be determined by <a href="https://www.britannica.com/science/Snells-law">Snell's law</a>. This law, discovered in 1621 (about 400 years ago) describes how light is bent while entering and exiting materials. <br>(If you want to research more about Snell's law, you can click the link above.).</p>
     <p>Snell's law implies that the amount light rays bend when entering a substance is determined by the refractive index of the substance. The refractive index of air is 1, and the refractive index of water is about 1.3. Light bends less when traveling between materials withsimilar refractive indexes, and bends more if the refractive indexes are further apart. </p>
     <p>The refractive index is inversely related to the speed light travels in a substance. This means that objects that light travels slower in will bend light more.</p>
+    <br>
+    <h1>Observing Refraction</h1>
+
     <p>One way refractive indexes show up is in diamonds. The refractive index of diamond is around 2.42, meaning it bends light rays much more than materials such as glass (which has a refractive index of around 1.5). This is why diamonds appear sparkly.</p>
     
-    <br>
     <p>One very useful way light refraction is used is in glasses. Since the lenses in glasses can bend light, by using curved lenses, light refraction can be used to bend light and focus images on the eyes. In prescription glasses, this is useful to counteract nearsightedness or farsightedness. In reading glasses, this is used to help focus on nearby objects (such as books) and prevent eye strain.</p>
+    <br><br><br>
     <br><br><br>
         <h1>Quiz</h1>
 
@@ -186,7 +192,7 @@
     Practice questions :<br>
     <div id="quiztext"></div>
     <select id="selectquiz"></select><br><br>
-    <button id="button345" type="submit" name="button345" value="enter"/>Submit Answer</button>
+    <button id="button345" type="submit" name="button345" value="enter">Submit Answer</button>
 
     <button id="button" type="submit" name="button" value="enter"/>New Question</button>
 
@@ -203,13 +209,17 @@
         const textquiz = document.getElementById('quiztext');
         const answerbox = document.getElementById('wasyouranswercorrectyesornoactuallyitwasnt');
         var questions = [
-            ["Which of these objects is most likely to be reflective?", ["Tomato","Mirror","Rock","Textbook"],1],
-            ["Which of these objects is most likely to refract light?", ["Drinking Glass","Metal Spoon","Rock"],0],
             ["What term is used to describe when light waves bend while traveling through an object?", ["Revision","Reflection","Refraction","Renovation"],2],
+            ["Fill in the blank : Light bounces off of ________ materials", ["reflective","invisible","reactive", "None of the above"],0],
+            ["A slice of pizza is:", ["Transparent", "Opaque"],1],
             ["What term is used to describe when light waves bounce off of an object?", ["Revision","Reflection","Refraction","Renovation"],1],
+            ["Which of these objects is most likely to refract light?", ["Drinking Glass","Metal Spoon","Rock"],0],
+            ["Your hand is:", ["Transparent", "Opaque"],1],
+            ["Which of these objects is most likely to be reflective?", ["Tomato","Mirror","Rock","Textbook"],1],
+            ["Why do diamonds sparkle more than other transparent materials?", ["More opaque","Higher index of refraction","Less carbon minerals","Less balanced metaphysical reactions"],1],
             ["Which of these objects is not primarily reflective nor refractive?", ["Glass Window","Bathroom Mirror","Wool Hat","Water"],2],
-            ["Fill in the blank : Light bounces off of ________ materials", ["reflective","invisible"],2]
-            ["Fill in the blank : Reflective materials are most often _________", ["opaque","opaque"],2]
+            ["A glass cup is:", ["Transparent", "Opaque"],0],
+            ["Fill in the blank : Reflective materials are most often (although not always) _________", ["transparent","green","opaque"],2]
         ];
 
         var genericoption = document.createElement("option");
@@ -253,6 +263,11 @@
 
 
     </script>
-
+    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+    Created by @Artefiction for Hack Club - Cubed 
+    <br><br><br>
 </body>
 </html>
